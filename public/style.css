@@ -1,0 +1,23 @@
+
+.img{
+    width: auto;
+    height: 250px;
+}
+.btn{
+    width: 40px;
+}
+.main{
+    padding: 10px;
+}
+.card{
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border: none;
+
+}
+p{
+    text-align: center;
+}
+.btn{
+    border: 1px solid;
+}
