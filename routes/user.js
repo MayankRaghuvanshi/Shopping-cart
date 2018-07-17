@@ -23,7 +23,7 @@ route.post('/',(req,res)=>{
 route.post('/login', passport.authenticate('local', {
 
     failureRedirect: '/user/fail',
-    successRedirect: '/user/login',
+    successRedirect: '/home',
      })
 );
 

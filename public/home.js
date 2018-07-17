@@ -1,3 +1,34 @@
+    $.get('/check',(data)=>{
+        let dropdownhead = $('#dropdown_head')
+        let rmlogin = $('#removelogin')
+        let rmcreate = $('#removecreate')
+        if(data==="not_exist"){
+            dropdownhead.empty()
+        }
+
+        else {
+            rmlogin.empty()
+            rmcreate.empty()
+              function dropreturn(fech) {
+                return $(`<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Account Management
+                </a>
+
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown" id="dropdownlist">
+                    <a class="dropdown-item" href="#">${fech.firstname}</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">log out</a>
+                </div>`)
+            }
+
+
+            dropdownhead.empty()
+            dropdownhead.append(dropreturn(data))
+
+
+        }
+    })
+
 function fetchList(done){
     $.get('http://localhost:1221/product',(data)=>{
         done(data)
