@@ -1,6 +1,6 @@
 const user = require('../database/db').user
 const route = require('express').Router()
-const session = require('express-session')
+const passport = require('../passport/passport')
 route.get('/',(req,res)=>{
     user.findAll().then((data)=>{
         res.send(data).status("0001")
@@ -9,39 +9,29 @@ route.get('/',(req,res)=>{
 route.post('/',(req,res)=>{
     user.create({
 
-        name: req.body.name,
-        email:req.body.email,
-        pasword:req.body.pasword
+        firstname: req.body.firstname,
+        lastname: req.body.lastname,
+        username:req.body.username,
+        password:req.body.password
     })
         .then((data)=>{
-        res.redirect('http://localhost:1221/user').status('0002')})
-            .catch((err)=>{
+            res.redirect('http://localhost:1221/user').status('0002')})
+        .catch((err)=>{
             res.send({error:"err"})
         })
-    })
-route.post('/login',(req,res)=>{
-    user.findOne({where:{email:req.body.email}}).then((data)=>{
-           const x=req.body.pasword
-         if(!data){
-            res.send("invalid user")
-        }
-        else if (req.body.pasword===data.pasword){
-            req.session.data=data.email;
-            res.send('success')
-        }
-        else{
-            res.send("invalid password")
-        }
+})
+route.post('/login', passport.authenticate('local', {
 
-    })
-    })
+    failureRedirect: '/user/fail',
+    successRedirect: '/user/login',
+     })
+);
+
 route.get('/login',(req,res)=>{
-    if (req.session){
-        res.send("success")
-    }
-    else{
-        res.send('log in first')
-    }
+   res.send("succrssRedirect")
+})
+route.get('/fail',(req,res)=>{
+    res.send({message: req.flash('error')})
 })
 
 

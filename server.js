@@ -1,9 +1,19 @@
 const express = require('express')
 const server = express()
-//server.use(express.json)
+const passport = require('./passport/passport')
+const session = require('express-session')
+const flash = require('connect-flash')
+server.use(express.json())
 server.use(express.urlencoded({
     extended:true
 }))
+
+server.use(session({
+    secret:"ftaftkrlorecover"
+}))
+server.use(flash())
+server.use(passport.initialize())
+server.use(passport.session())
 
 server.use('/',express.static(__dirname+'/public/'))
 server.use('/user',express.static(__dirname+'/public/user/'))

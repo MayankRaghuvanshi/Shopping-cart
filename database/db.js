@@ -7,22 +7,26 @@ const db = new sequelize('test1','root','singh7272',{
         min:0
     }})
 
-const user = db.define('person',{
+const user = db.define('users',{
     id:{
         type: sequelize.INTEGER,
         autoIncrement:true,
         allowNull:true,
         primaryKey:true
     },
-    name:{
+    firstname:{
         type:sequelize.STRING,
         allowNull:false,
          },
-    email:{
+    lastname:{
+        type:sequelize.STRING,
+        allowNull:false,
+    },
+    username:{
         type:sequelize.STRING,
         allowNull:false
           },
-    pasword:{
+    password:{
         type:sequelize.STRING,
         allowNull:false
           }})
